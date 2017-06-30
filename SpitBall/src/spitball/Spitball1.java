@@ -1,3 +1,8 @@
+/*
+ * Spitball1.java
+ * Clinton Peterson, Shawn Potter, Maria Gallardo
+ */
+
 package spitball;
 
 //import packages
