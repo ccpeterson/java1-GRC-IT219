@@ -73,10 +73,12 @@ public class Spitball1 extends GraphicsProgram
 			if(spitBallLocation == 10)
 			{
 				spitBallMove = 5;
+				o1.scale(2);
 			}	
 			else if(spitBallLocation == 300)
 			{
 				spitBallMove = -5;
+				o1.scale(.5);
 			}
 			o2.move(ufoMove,0);
 			o1.move(0,spitBallMove);
