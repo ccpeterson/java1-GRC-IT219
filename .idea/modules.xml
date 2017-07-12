@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ACMConsole/ACMConsole.iml" filepath="$PROJECT_DIR$/ACMConsole/ACMConsole.iml" />
+      <module fileurl="file://$PROJECT_DIR$/HelloWorld/HelloWorld.iml" filepath="$PROJECT_DIR$/HelloWorld/HelloWorld.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PacMan/PacMan.iml" filepath="$PROJECT_DIR$/PacMan/PacMan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ParentChildTes/ParentChildTes.iml" filepath="$PROJECT_DIR$/ParentChildTes/ParentChildTes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RedLight/RedLight.iml" filepath="$PROJECT_DIR$/RedLight/RedLight.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpitBall/SpitBall.iml" filepath="$PROJECT_DIR$/SpitBall/SpitBall.iml" />
+    </modules>
+  </component>
+</project>
