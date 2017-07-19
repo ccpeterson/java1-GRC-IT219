@@ -47,13 +47,15 @@ public class Storybook extends GraphicsProgram  {
 	}
 	
 	public void scene(){
+		pause(2000);
 		sceneBegin();
+		pause(2000);
 		sceneCresendo();
+		pause(2000);
 		sceneEnds();
 	}
 	
 	public void sceneBegin(){
-		pause(2000);
 		//Draw thought clouds and label
 		//cloud defined at the class level
 
@@ -83,16 +85,14 @@ public class Storybook extends GraphicsProgram  {
 	}
 	
 	public void sceneCresendo(){
-		//wait 2 sec, then add alien and change label text
-		pause(2000);
+		// add alien and change label text
 		//alien defined at class level
 		alien.setBounds(0, FLOOR_HEIGHT - 100, 100, 100);
 		add(alien);
 		thought.setLabel("! ! ! !");
 	}
 	public void sceneEnds(){
-		//wait 2 sec, remove cloud and label, start moving alien and cat
-		pause(2000);
+		//remove cloud and label, start moving alien and cat
 		remove(thought);
 		remove(cloud);
 		while(true){
