@@ -4,12 +4,12 @@ import acm.graphics.*;
 import acm.util.*;
 import acm.program.GraphicsProgram;
 
-public class Asteroids extends GraphicsProgram{
+public class Asteroids extends GraphicsProgram
+{
 
 	//Constants
     final int APP_WIDTH = 600;
     final int APP_HEIGHT = 600;
-    
     
     //these have to be defined here so all the different methods can use them
     GPolygon asteroid1;
@@ -30,10 +30,12 @@ public class Asteroids extends GraphicsProgram{
 	public void run()
 	{
 		createAsteroids();
+		moveAsteroids();
 	}
-	public void createAsteroids(){
+	public void createAsteroids()
+	{
 		asteroid1 = new GPolygon();
-		asteroid1.setLocation(rg.nextInt(100, APP_WIDTH-100), rg.nextInt(100, APP_HEIGHT-100));
+		asteroid1.setLocation(-100, rg.nextInt(100, APP_HEIGHT-100));
 		asteroid1.addVertex(-30, 0);
 		asteroid1.addVertex(0, 40);
 		asteroid1.addVertex(30, 0);
@@ -42,7 +44,7 @@ public class Asteroids extends GraphicsProgram{
 		asteroid1.setFilled(true);
 		add(asteroid1);
 		asteroid2 = new GPolygon();
-		asteroid2.setLocation(rg.nextInt(100, APP_WIDTH-100), rg.nextInt(100, APP_HEIGHT-100));
+		asteroid2.setLocation(-100, rg.nextInt(100, APP_HEIGHT-100));
 		asteroid2.addVertex(-30, 0);
 		asteroid2.addVertex(0, 40);
 		asteroid2.addVertex(30, 0);
@@ -51,7 +53,7 @@ public class Asteroids extends GraphicsProgram{
 		asteroid2.setFilled(true);
 		add(asteroid2);
 		asteroid3 = new GPolygon();
-		asteroid3.setLocation(rg.nextInt(100, APP_WIDTH-100), rg.nextInt(100, APP_HEIGHT-100));
+		asteroid3.setLocation(-100, rg.nextInt(100, APP_HEIGHT-100));
 		asteroid3.addVertex(-30, 0);
 		asteroid3.addVertex(0, 40);
 		asteroid3.addVertex(30, 0);
@@ -61,5 +63,30 @@ public class Asteroids extends GraphicsProgram{
 		add(asteroid3);
 		
 
+	}
+	public void moveAsteroids()
+	{
+		int x1 = rg.nextInt(10,15);
+		int x2 = rg.nextInt(10,15);
+		int x3 = rg.nextInt(10,15);
+		while(true)
+		{
+			pause(50);
+			asteroid1.move(x1,0);
+			asteroid2.move(x2,0);
+			asteroid3.move(x3,0);
+			if (asteroid1.getX() >= (APP_WIDTH +100) )
+			{
+				asteroid1.setLocation(-100, asteroid1.getY());
+			}
+			if (asteroid2.getX() >= (APP_WIDTH +100) )
+			{
+				asteroid2.setLocation(-100, asteroid2.getY());
+			}
+			if (asteroid3.getX() >= (APP_WIDTH +100) )
+			{
+				asteroid3.setLocation(-100, asteroid3.getY());
+			}
+		}
 	}
 }
