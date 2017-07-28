@@ -1,10 +1,13 @@
 import acm.program.*;
 import acm.util.RandomGenerator;
 
+import java.awt.Color;
 import java.awt.event.*;
 
 public class GuessingGame extends ConsoleProgram
 {
+	final int WIDTH = 800;
+	final int HEIGHT = 500;
 	//create a random number generator name rg
 	RandomGenerator rg = new RandomGenerator();
 	//create a constants for the array size, range of numbers, and number of guesses	
@@ -15,7 +18,13 @@ public class GuessingGame extends ConsoleProgram
 	//declare variables so they can be used globally
 	int answers[] = new int[ARRAY_SIZE] ;
 	int guess;
-	boolean winner = false;	
+	boolean winner = false;
+	
+	public void init()
+	{
+		setSize(WIDTH, HEIGHT);
+		setBackground(Color.BLACK);
+	}
 	
 	public void run() {
 		//setup the array with random numbers
@@ -26,6 +35,9 @@ public class GuessingGame extends ConsoleProgram
 			println(answers[i]);
 		}
 		//welcomes users and explains the game
+		println("Hey there, this is a guessing game.");
+		println("I have thought of " + ARRAY_SIZE + " numbers between (and including) " + MIN_RANGE + " and " + MAX_RANGE + ".");
+		println("You have " + GUESS_ATTEMPTS + " chances to guess one of them.");
 		println("Guess a number, " + MIN_RANGE + " through " + MAX_RANGE);
 		//give the user a number of attempts to guess the right number
 		for (int i=0; i<GUESS_ATTEMPTS; i++) {
@@ -38,15 +50,15 @@ public class GuessingGame extends ConsoleProgram
 				break;
 			}
 			else if (GUESS_ATTEMPTS - 1 - i > 0) {
-				println ("sorry no. you have " + (GUESS_ATTEMPTS - 1 - i) + " guesses left" );
+				println ("Sorry no. you have " + (GUESS_ATTEMPTS - 1 - i) + " guesses left" );
 			}
 		}
 		//using the same variable to see if the win or lose message is displayed
 		if (winner == true) {
-				println("you win");
+				println("Yay, you did it, congrats.");
 			}
 		else {
-			println("you suck");
+			println("You are out of guesses, too bad.");
 		}
 	}
 	
@@ -66,12 +78,16 @@ public class GuessingGame extends ConsoleProgram
 	// will return the number if it's valid, otherwise will loop until the users picks a good one 
 	public int checkInput() {
 		while (true){
+			
+			
+			
 			int x = readInt("What's your guess: ");
+			
 			if (x>=MIN_RANGE && x <= MAX_RANGE){
 				return x;				
 			}
 			else {
-				println("please pick a number within the range specified.");
+				println("Please pick a number within the range specified.");
 			}
 		}	
 	}
