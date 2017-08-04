@@ -204,7 +204,7 @@ public class Bugbot extends GraphicsProgram {
 			if (bug.getBounds().intersects(ovals[3].getBounds())) {
 				break;
 			}
-			pause(50);
+			pause(20);
 		}
 	}
 }
