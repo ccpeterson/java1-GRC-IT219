@@ -1,16 +1,16 @@
 package bugbot;
 
-import java.awt.*;
-import java.awt.event.*;
-
+import java.awt.Color;
+import java.util.Random;
 import acm.graphics.*;
-import acm.util.*;
-import acm.program.*;
+import acm.program.GraphicsProgram;
 
 public class Bugbot extends GraphicsProgram {
-	
+	//window size
 	public static final int WIN_WIDTH = 800;
 	public static final int WIN_HEIGHT = 600;
+	
+	
 	
 	GRect[] rects;
 	GOval[] ovals;
@@ -20,8 +20,6 @@ public class Bugbot extends GraphicsProgram {
 	public void init(){
 		setSize(WIN_WIDTH, WIN_HEIGHT);
 		setBackground(Color.WHITE);
-		
-		
 	}
 	
 	public void run() {
@@ -29,9 +27,15 @@ public class Bugbot extends GraphicsProgram {
 		addBug();
 		moveBug();
 	}
+
+	// used to decide to turn left or right randomly
+	public boolean getRandomBoolean() {
+	    Random random = new Random();
+	    return random.nextBoolean();
+	}
 	
 	public void createPlayfield() {
-		rects = new GRect[4];
+		rects = new GRect[5];
 		rects[0] = new GRect(400,0,50,200);
 		rects[0].setFillColor(Color.GREEN);
 		rects[0].setFilled(true);
@@ -48,6 +52,11 @@ public class Bugbot extends GraphicsProgram {
 		rects[3].setFillColor(Color.CYAN);
 		rects[3].setFilled(true);
 		add(rects[3]);
+		rects[4] = new GRect(50,50,WIN_WIDTH-100,WIN_HEIGHT-100);
+		rects[4].setVisible(false);
+		rects[4].setFilled(false);
+		rects[4].sendToBack();
+		add(rects[4]);
 		ovals = new GOval[4];
 		ovals[0] = new GOval(100,100,50,50);
 		ovals[0].setFillColor(Color.GREEN);
@@ -77,22 +86,124 @@ public class Bugbot extends GraphicsProgram {
 		add(bug,50,300);				
 	}
 	public void moveBug() {
-		boolean collision = false;
-		while (collision == false) {
-			bug.move(5,0);
-			GRectangle bounds = bug.getBounds();
-			for (int i=0; i<4; i++) {
-				if (bounds == rects[i].getBounds()) {
-					collision = true;
-					break;
+		//starts the bug moving to the right
+		int direction = 1;
+		while (true) {
+			//the 4 directions of travel
+			if (direction == 1) {
+				bug.move(5,0);
+			}
+			if (direction == 2) {
+				bug.move(0,5);
+			}
+			if (direction == 3) {
+				bug.move(-5,0);
+			}
+			if (direction == 4) {
+				bug.move(0,-5);
+			}
+			//this checks to see if the bug has his one of the rectangles
+			for (int i = 0; i < 4; i++) {
+				if (bug.getBounds().intersects(rects[i].getBounds())) {
+					if (direction == 1) {
+						bug.move(-20, 0);
+						if (getRandomBoolean() == true) {
+							direction = 2;
+						}
+						else {
+							direction = 4;
+						}
+					}
+					else if (direction == 2) {
+						bug.move(0, -20);
+						if (getRandomBoolean() == true) {
+							direction = 3;
+						}
+						else {
+							direction = 1;
+						}
+					}
+					else if (direction == 3) {
+						bug.move(20, 0);
+						if (getRandomBoolean() == true) {
+							direction = 4;
+						}
+						else {
+							direction = 2;
+						}
+					}
+					else if (direction == 4) {
+						bug.move(0, 20);
+						if (getRandomBoolean() == true) {
+							direction = 1;
+						}
+						else {
+							direction = 3;
+						}
+					}
 				}
 			}
-			for (int i=0; i<4; i++) {
-					if (bounds == rects[i].getBounds()) {
-						collision = true;
-						break;
+			//this checks to see if the bug has his one of the ovals, besides the target
+			for (int i = 0; i < 3; i++) {
+				if (bug.getBounds().intersects(ovals[i].getBounds())) {
+					if (direction == 1) {
+						bug.move(-20, 0);
+						if (getRandomBoolean() == true) {
+							direction = 2;
+						}
+						else {
+							direction = 4;
+						}
 					}
-			}			
+					else if (direction == 2) {
+						bug.move(0, -20);
+						if (getRandomBoolean() == true) {
+							direction = 3;
+						}
+						else {
+							direction = 1;
+						}
+					}
+					else if (direction == 3) {
+						bug.move(20, 0);
+						if (getRandomBoolean() == true) {
+							direction = 4;
+						}
+						else {
+							direction = 2;
+						}
+					}
+					else if (direction == 4) {
+						bug.move(0, 20);
+						if (getRandomBoolean() == true) {
+							direction = 1;
+						}
+						else {
+							direction = 3;
+						}
+					}
+				}
+			}
+			//this turns the bug around when it hits the edges
+			if (!bug.getBounds().intersects(rects[4].getBounds())) {
+			
+				if (direction == 1) {
+					direction = 3;
+				}
+				else if (direction == 2) {
+					direction = 4;
+				}
+				else if (direction == 3) {
+					direction = 1;
+				}
+				else if (direction == 4) {
+					direction = 2;
+				}
+			}
+			//this breaks the while loop when the bug hits the target
+			if (bug.getBounds().intersects(ovals[3].getBounds())) {
+				break;
+			}
 			pause(50);
 		}
 	}
