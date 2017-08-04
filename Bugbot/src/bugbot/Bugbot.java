@@ -36,11 +36,11 @@ public class Bugbot extends GraphicsProgram {
 	
 	public void createPlayfield() {
 		rects = new GRect[5];
-		rects[0] = new GRect(400,0,50,200);
+		rects[0] = new GRect(450,0,50,250);
 		rects[0].setFillColor(Color.GREEN);
 		rects[0].setFilled(true);
 		add(rects[0]);
-		rects[1] = new GRect(200,200,50,50);
+		rects[1] = new GRect(200,250,50,50);
 		rects[1].setFillColor(Color.ORANGE);
 		rects[1].setFilled(true);
 		add(rects[1]);
@@ -48,7 +48,7 @@ public class Bugbot extends GraphicsProgram {
 		rects[2].setFillColor(Color.BLUE);
 		rects[2].setFilled(true);
 		add(rects[2]);
-		rects[3] = new GRect(600,500,100,100);
+		rects[3] = new GRect(500,500,300,100);
 		rects[3].setFillColor(Color.CYAN);
 		rects[3].setFilled(true);
 		add(rects[3]);
@@ -58,11 +58,11 @@ public class Bugbot extends GraphicsProgram {
 		rects[4].sendToBack();
 		add(rects[4]);
 		ovals = new GOval[4];
-		ovals[0] = new GOval(100,100,50,50);
+		ovals[0] = new GOval(100,100,150,50);
 		ovals[0].setFillColor(Color.GREEN);
 		ovals[0].setFilled(true);
 		add(ovals[0]);
-		ovals[1] = new GOval(500,250,50,50);
+		ovals[1] = new GOval(600,100,50,50);
 		ovals[1].setFillColor(Color.ORANGE);
 		ovals[1].setFilled(true);
 		add(ovals[1]);
