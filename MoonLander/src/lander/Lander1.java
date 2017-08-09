@@ -7,48 +7,79 @@ import acm.graphics.*;
 import acm.program.GraphicsProgram;
 
 public class Lander1 extends GraphicsProgram {
+	//window size
 	public static final int WIN_WIDTH = 800;
 	public static final int WIN_HEIGHT = 600;
-	
-	public GOval circle;
+	//downward speed added every frame
+	public static final int GRAVITY = 1;
+	//refresh rate
+	public static final int REFRESH_RATE = 50;
+	//upward speed added every click
+	public static final int THRUST = 10;
+	public GImage lander;
 	public int rateOfDecent = 0;
+	
 		
 	public void init() {
 		setSize(WIN_WIDTH, WIN_HEIGHT);
 		setBackground(Color.WHITE);
 	}
+	
 	public void run() {
-		circle = new GOval(50,50,20,20);
-		circle.setFillColor(Color.BLUE);
-		circle.setFilled(true);
-		add(circle);
-		addKeyListeners();
-		startGravity();
+		addLander();
+		printStartGame();
+		playGame();
 	}
-	public void keyPressed(KeyEvent e)
-	{
-		switch(e.getKeyCode())
-		{
-			case KeyEvent.VK_UP:
-				rateOfDecent = rateOfDecent -10;
-				break;
-			case KeyEvent.VK_DOWN:
-				circle.move(0, 10);
-				break;
-			case KeyEvent.VK_LEFT:
-				circle.move(-10, 0);
-				break;
-			case KeyEvent.VK_RIGHT:
-				circle.move(10, 0);
-				break;
-		}
+	
+	public void addLander() {
+		lander = new GImage("lander.JPG");
+		lander.setBounds(WIN_WIDTH/2, 100, 100, 75);
+		add(lander);		
 	}
+	
+	public void mouseMoved(MouseEvent e) {
+		if ((e.getX() < getWidth() ) && (e.getX() > 0)) {
+			lander.setLocation(e.getX() , lander.getY());
+		}		
+	}
+	
+	public void mousePressed(MouseEvent e) {
+		rateOfDecent = rateOfDecent - THRUST;
+	}
+	
 	public void startGravity() {
 		while (true) {
-			circle.move(0, rateOfDecent);
-			rateOfDecent++;
-			pause(100);
+			lander.move(0, rateOfDecent);
+			rateOfDecent = rateOfDecent + GRAVITY;
+			pause(REFRESH_RATE);
 		}
+	}
+	
+	public void playGame() {
+		waitForClick();
+		addMouseListeners();
+		startGravity();		
+	}
+	
+	public void printStartGame() {
+		GLabel startGame = new GLabel ("Click to start", getWidth()/2, getHeight()/2);
+		// startGame.move(-startGame.getWidth()/2, -startGame.getHeight());
+		startGame.setColor(Color.RED);
+		add (startGame);
+		waitForClick();
+		remove (startGame);
+	}
+	
+	public void printGameOver() {
+		GLabel gameOver = new GLabel ("Game Over", getWidth()/2, getHeight()/2);
+		gameOver.setColor(Color.RED);
+		add (gameOver);
+	}	
+	
+	public void printWinner() {
+		GLabel Winner = new GLabel ("Winner!!", getWidth()/2, getHeight()/2);
+		Winner.setColor(Color.RED);
+		add (Winner);
 	}
 
 }
